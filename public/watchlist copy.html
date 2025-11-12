@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watchlist - MyWatchlist</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h1>My Watchlist</h1>
+    <button onclick="location.href='/'" style="background: #3498db;">Home</button>
+    <button onclick="localStorage.clear(); location.href='/'" style="background: #e74c3c;">Logout</button>
+
+    <!-- Search -->
+    <div style="margin: 20px 0;">
+      <input type="text" id="searchInput" placeholder="Search movies/TV..." style="padding: 12px; width: 70%; border-radius: 50px; border: none;">
+      <button id="searchBtn" style="margin-left: 10px;">Search</button>
+    </div>
+    <div id="searchResults"></div>
+
+    <!-- Watchlist -->
+    <h2>Your List</h2>
+    <ul id="watchlist"></ul>
+  </div>
+</body>
+</html>
