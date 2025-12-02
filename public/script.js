@@ -58,6 +58,13 @@ if (document.getElementById('registerForm')) {
 
 // === WATCHLIST PAGE ===
 if (window.location.pathname === '/watchlist') {
+  // Display Username
+  const username = localStorage.getItem('username');
+  if (username) {
+    const greetingEl = document.getElementById('userGreeting');
+    if (greetingEl) greetingEl.textContent = `Hello, ${username}!`;
+  }
+
   // Load watchlist on start
   loadWatchlist();
   loadRecommendations();
@@ -189,7 +196,7 @@ async function loadRecommendations() {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const results = await res.json();
-    
+
     const container = document.getElementById('recommendations');
     container.innerHTML = '';
 

@@ -150,3 +150,13 @@ input:focus {
 }
 .fade-in { animation: fadeIn 0.3s ease; }
 .removing { animation: fadeOut 0.3s ease forwards; }
+
+/* User Greeting */
+.user-greeting {
+  font-size: 1.2rem;
+  color: #00d4ff;
+  margin-top: -15px;
+  margin-bottom: 25px;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
