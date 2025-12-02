@@ -60,6 +60,7 @@ if (document.getElementById('registerForm')) {
 if (window.location.pathname === '/watchlist') {
   // Load watchlist on start
   loadWatchlist();
+  loadRecommendations();
 
   // Search
   document.getElementById('searchBtn').addEventListener('click', () => {
@@ -177,5 +178,40 @@ async function deleteItem(id) {
     loadWatchlist();
   } catch (err) {
     alert('Delete failed');
+  }
+}
+// Load Recommendations
+async function loadRecommendations() {
+  if (!token) return;
+
+  try {
+    const res = await fetch('/api/recommendations', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const results = await res.json();
+    
+    const container = document.getElementById('recommendations');
+    container.innerHTML = '';
+
+    if (!results || results.length === 0) {
+      container.innerHTML = '<p>No recommendations available.</p>';
+      return;
+    }
+
+    results.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'movie-card';
+      card.innerHTML = `
+        <img src="https://image.tmdb.org/t/p/w200${item.poster_path || ''}" onerror="this.style.display='none'">
+        <h3>${item.title || item.name}</h3>
+        <p>${item.media_type === 'tv' ? 'TV Show' : 'Movie'} • ${item.release_date || item.first_air_date || 'N/A'}</p>
+        <button onclick="addToWatchlist(${item.id}, '${item.media_type || 'movie'}', '${(item.title || item.name).replace(/'/g, "\\'")}', '${item.poster_path || ''}')">
+          Add to Watchlist
+        </button>
+      `;
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Failed to load recommendations', err);
   }
 }

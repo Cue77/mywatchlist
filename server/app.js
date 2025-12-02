@@ -6,6 +6,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth');
 const searchRoutes = require('./routes/search');
 const watchlistRoutes = require('./routes/watchlist');
+const recommendationRoutes = require('./routes/recommendations');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/api/auth', authRoutes);
 app.use('/api/search', searchRoutes);
 app.use('/api/watchlist', watchlistRoutes);
+app.use('/api/recommendations', recommendationRoutes);
 
 // Serve HTML pages
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '..', 'public', 'index.html')));
